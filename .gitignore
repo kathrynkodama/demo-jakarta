@@ -1,0 +1,31 @@
+# Maven generated
+target/
+
+# Gradle generated
+build/
+
+# Eclipse generated
+.apt_generated/
+.settings/
+.project
+.classpath
+.factorypath
+MANIFEST.MF
+
+# IntelliJ generated
+*.iml
+.idea/
+
+# MacOS system files
+.DS_Store
+
+# Asciidoc rendered
+README.html
+
+# VSCode
+.vscode/
+.gradle/
+
+# Zip files
+*.zip
+
