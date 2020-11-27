@@ -13,6 +13,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <liberty.var.artifactId>${project.artifactId}</liberty.var.artifactId>
+        <!-- Derby library -->
+        <version.derby>10.14.2.0</version.derby>
+        <derby.path>${user.home}/.m2/repository/org/apache/derby/derby</derby.path>
+        <liberty.var.derby.lib>${derby.path}/${version.derby}/derby-${version.derby}.jar</liberty.var.derby.lib>
+
     </properties>
 
     <dependencies>
@@ -20,7 +25,7 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.0.0-RC2</version>
+            <version>9.0.0-RC3</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -62,6 +67,13 @@
             <version>2.3.1</version>
             <scope>test</scope>
         </dependency>
+        <!-- Derby from https://mvnrepository.com/artifact/org.apache.derby/derby -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>${version.derby}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -77,10 +89,28 @@
                     <runtimeArtifact>
                         <groupId>io.openliberty.beta</groupId>
                         <artifactId>openliberty-jakartaee9</artifactId>
-                        <version>20.0.0.10-beta</version>
+                        <version>21.0.0.1-beta</version>
                         <type>zip</type>
                     </runtimeArtifact>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-derby-dependency</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>derby</includeArtifactIds>
+                            <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <!-- end::libertyMavenPlugin[] -->
             <plugin>
