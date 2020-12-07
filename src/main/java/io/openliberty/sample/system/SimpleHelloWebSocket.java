@@ -5,14 +5,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.websocket.ClientEndpoint;
+import jakarta.websocket.server.PathParam;
+import jakarta.websocket.server.ServerEndpoint;
+
+
 import java.io.IOException;
 
-@WebServlet(name = "hello", urlPatterns = { "/hello" })
-public class SimpleHello extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+@ServerEndpoint(value = "")
+public class SimpleHelloWebSocket {
+ 
+    protected void doGet(@PathParam("guest-id") HttpServletResponse user, HttpServletResponse resp) throws ServletException, IOException {
+ 
         resp.setContentType("text/html;charset=UTF-8");
 
         resp.getWriter().println("Hello Jakarta EE 9!");
