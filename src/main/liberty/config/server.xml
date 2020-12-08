@@ -6,5 +6,16 @@
     <webApplication location="${artifactId}.war" contextRoot="/" />
 
     <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint" />
+    <!-- Derby Library Configuration -->    
+    <library id="derbyJDBCLib">
+        <file name="${derby.lib}" />
+    </library>
 
+    <!-- Datasource Configuration -->
+    <!-- tag::data-source[] -->
+    <dataSource id="eventjpadatasource"
+                jndiName="jdbc/eventjpadatasource">
+        <jdbcDriver libraryRef="derbyJDBCLib" />
+        <properties.derby.embedded databaseName="EventDB" createDatabase="create"/>
+    </dataSource>
 </server>
