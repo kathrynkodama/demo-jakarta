@@ -15,12 +15,39 @@
         <liberty.var.artifactId>${project.artifactId}</liberty.var.artifactId>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- tag::arquillian-bom[] -->
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.7.0.Alpha6</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- end::arquillian-bom[] -->
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
+        <!-- Arquillian --> 
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.openliberty.arquillian</groupId>
+            <artifactId>arquillian-liberty-managed-jakarta</artifactId>
+            <version>2.0.0-M2-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+
+
         <!-- Provided dependencies -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.0.0-RC2</version>
+            <version>9.0.0-RC3</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -76,17 +103,29 @@
                 <configuration>
                     <runtimeArtifact>
                         <groupId>io.openliberty.beta</groupId>
-                        <artifactId>openliberty-jakartaee9</artifactId>
-                        <version>20.0.0.10-beta</version>
+                        <artifactId>openliberty-runtime</artifactId>
+                        <version>21.0.0.1-beta</version>
                         <type>zip</type>
                     </runtimeArtifact>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>configure-arquillian-xml</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>configure-arquillian</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!-- end::libertyMavenPlugin[] -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -101,4 +140,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <!-- Configure Sonatype OSS Maven snapshots repository -->
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
 </project>
