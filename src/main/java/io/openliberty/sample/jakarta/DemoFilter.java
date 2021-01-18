@@ -1,4 +1,4 @@
-package io.openliberty.sample.system;
+package io.openliberty.sample.jakarta;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -9,12 +9,13 @@ import jakarta.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "filter", urlPatterns = {"/demo"})
-public class filter implements Filter {
+@WebFilter(filterName = "filter", urlPatterns = { "/filter" })
+public class DemoFilter implements Filter {
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException{
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+			throws IOException, ServletException {
 		res.setContentType("text/html;charset=UTF-8");
-		res.getWriter().println("This is a filter !");
+		res.getWriter().println("This request visited the filter!");
 		chain.doFilter(req, res);
 	}
 }
