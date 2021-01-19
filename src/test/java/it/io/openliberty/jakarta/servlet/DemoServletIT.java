@@ -1,4 +1,4 @@
-package it.io.openliberty.jakarta;
+package it.io.openliberty.jakarta.servlet;
 
 import static org.junit.Assert.assertEquals;
 

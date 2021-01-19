@@ -1,4 +1,4 @@
-package io.openliberty.sample.jakarta;
+package io.openliberty.sample.jakarta.servlet;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
