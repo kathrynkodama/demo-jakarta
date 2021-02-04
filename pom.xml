@@ -20,7 +20,7 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.0.0-RC2</version>
+            <version>9.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.0.Alpha6</version>
+            <version>7.0.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -82,12 +82,12 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>3.3.3</version>
+                <version>3.3.4</version>
                 <configuration>
                     <runtimeArtifact>
                         <groupId>io.openliberty.beta</groupId>
                         <artifactId>openliberty-jakartaee9</artifactId>
-                        <version>21.0.0.1-beta</version>
+                        <version>21.0.0.2-beta</version>
                         <type>zip</type>
                     </runtimeArtifact>
                 </configuration>
