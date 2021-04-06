@@ -9,25 +9,20 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/Students")
 public class Students {
 	
-	List<PersonEntity> students;
-
-	public Students() {
-		students = new ArrayList<PersonEntity>();
-	}
+	public static List<Person> students = new ArrayList<Person>();
 	
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public List<PersonEntity> getStudents() {
-		System.out.println("getting student");
+	@Path("/list")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Person> getStudents() {
 		return this.students;
 	}
-
+	
 	@POST
 	@Path("/create")
-	@Consumes(MediaType.TEXT_PLAIN)
-	public void createStudent(String message) {
-		PersonEntity student = new PersonEntity(message);
+	public void createStudent(String name) {
+		System.out.println("Creating student: " + name);
+		Person student = new Person(name);
 		this.students.add(student);
-		System.out.println("creating student");
 	}
 }
