@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                            https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+        version="3.0">
+        <persistence-unit name="jpa-unit" transaction-type="JTA">
+            <jta-data-source>jdbc/eventjpadatasource</jta-data-source>
+            <properties>
+                <!-- tag::eclipse-link[] -->
+                    <property name="eclipselink.ddl-generation" value="create-tables"/>
+                    <property name="eclipselink.ddl-generation.output-mode" value="both" />
+                <!-- end::eclipse-link[] -->
+                </properties>
+    </persistence-unit>
+</persistence>
