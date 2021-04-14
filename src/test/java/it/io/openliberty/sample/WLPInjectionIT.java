@@ -3,18 +3,16 @@ package it.io.openliberty.sample;
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import io.openliberty.sample.system.Greeter;
 
-@RunWith(Arquillian.class)
-public class WLPInjectionIT {
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class WLPInjectionIT extends Arquillian{
 
     @Deployment
     public static JavaArchive createDeployment() {
