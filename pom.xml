@@ -91,18 +91,18 @@
             <!-- Enable liberty-maven plugin -->
             <!-- tag::libertyMavenPlugin[] -->
 			<plugin>
-               <groupId>io.openliberty.tools</groupId>
-               <artifactId>liberty-maven-plugin</artifactId>
-               <version>3.3.4</version>
-               <configuration>
-                   <runtimeArtifact>
-                       <groupId>io.openliberty.beta</groupId>
-                       <artifactId>openliberty-jakartaee9</artifactId>
-                       <version>21.0.0.3-beta</version>
-                       <type>zip</type>
-                   </runtimeArtifact>
-               </configuration>
-           </plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>3.4</version>
+                <configuration>
+                    <runtimeArtifact>
+                        <groupId>io.openliberty.beta</groupId>
+                        <artifactId>openliberty-jakartaee9</artifactId>
+                        <version>21.0.0.10-beta</version>
+                        <type>zip</type>
+                    </runtimeArtifact>
+                </configuration>
+            </plugin>
             <!-- end::libertyMavenPlugin[] -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
