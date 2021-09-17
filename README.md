@@ -7,7 +7,7 @@ Demo project using Jakarta EE 9 specifications with Open Liberty.
 1. Clone the repo
 
 ```
-git clone git@github.com:kathrynkodama/demo-jakarta.git
+git clone https://github.com/kathrynkodama/demo-jakarta.git
 ```
 
 2. Download and Install Eclipse IDE: https://www.eclipse.org/downloads/
