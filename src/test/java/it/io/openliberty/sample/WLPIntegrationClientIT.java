@@ -1,25 +1,30 @@
 package it.io.openliberty.sample;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+// import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+// import org.junit.Assert;
+// import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+// import org.junit.runner.RunWith;
 
 import io.openliberty.sample.system.HelloServlet;
 
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class WLPIntegrationClientIT {
 
     @Deployment(testable = false)
@@ -30,18 +35,21 @@ public class WLPIntegrationClientIT {
                         .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml"));
     }
 
+    @ArquillianResource
+    private URL url;
+
     @Test
-    public void shouldBeAbleToInvokeServletInDeployedWebApp(@ArquillianResource URL url) throws Exception {
+    public void shouldBeAbleToInvokeServletInDeployedWebApp() throws Exception {
         URL helloEndpoint = new URL(url, HelloServlet.URL_PATTERN);
 
         HttpURLConnection conn = (HttpURLConnection) helloEndpoint.openConnection();
-        Assert.assertEquals(
-                "The url: " + helloEndpoint + " response code should be 200 but was: " + conn.getResponseCode(),
-                HttpURLConnection.HTTP_OK, conn.getResponseCode());
+        assertEquals(
+
+                HttpURLConnection.HTTP_OK, conn.getResponseCode(),
+                "The url: " + helloEndpoint + " response code should be 200 but was: " + conn.getResponseCode());
 
         String body = readAllAndClose(helloEndpoint.openStream());
-        Assert.assertEquals("Verify that the servlet was deployed and returns expected result", HelloServlet.MESSAGE,
-                body);
+        assertEquals(HelloServlet.MESSAGE, body, "Verify that the servlet was deployed and returns expected result");
     }
 
     private String readAllAndClose(InputStream is) throws Exception {
