@@ -23,7 +23,7 @@ public class DemoJsonProcessing {
 	public static void main(String[] args) {
 		writeJson(readJson("src/main/java/io/openliberty/sample/jakarta/jsonp/data.json"));
 		writeJson(buildJson());
-		// jsonPointer();
+		jsonPointer();
 	}
 	
 	public static JsonObject readJson(String filepath) {
@@ -67,22 +67,22 @@ public class DemoJsonProcessing {
 		return jsonObject;
 	}
 
-	// public static void jsonPointer() {
-	// 	String jsonString = "{\"name\":\"duke\",\"age\":42,\"skills\":[\"Java SE\", \"Java EE\"]}";
+	public static void jsonPointer() {
+		String jsonString = "{\"name\":\"duke\",\"age\":42,\"skills\":[\"Java SE\", \"Java EE\"]}";
 	
-	// 	JsonObject jsonObject = Json.createReader(new StringReader(jsonString)).readObject();
+		JsonObject jsonObject = Json.createReader(new StringReader(jsonString)).readObject();
+
+		JsonPointer arrayElementPointer = Json.createPointer("/skills/1");
+		JsonPointer agePointer = Json.createPointer("/age");
+		JsonPointer namePointer = Json.createPointer("/name");
+		JsonPointer addressPointer = Json.createPointer("/address");
+		JsonPointer tagsPointer = Json.createPointer("/tags");
 	
-	// 	JsonPointer arrayElementPointer = Json.createPointer("/skills/1");
-	// 	JsonPointer agePointer = Json.createPointer("/age");
-	// 	JsonPointer namePointer = Json.createPointer("/name");
-	// 	JsonPointer addressPointer = Json.createPointer("/address");
-	// 	JsonPointer tagsPointer = Json.createPointer("/tags");
-	
-	// 	System.out.println("Get array element with pointer: " + arrayElementPointer.getValue(jsonObject).toString());
-	// 	System.out.println("Remove age with pointer: " + agePointer.remove(jsonObject));
-	// 	System.out.println("Replace name with pointer: " + namePointer.replace(jsonObject, Json.createValue("john")));
-	// 	System.out.println("Check address with pointer: " + addressPointer.containsValue(jsonObject));
-	// 	System.out.println("Add tags with pointer: " + tagsPointer.add(jsonObject, Json.createArrayBuilder().add("nice").build()));
-	//   }
+		System.out.println("Get array element with pointer: " + arrayElementPointer.getValue(jsonObject).toString());
+		System.out.println("Remove age with pointer: " + agePointer.remove(jsonObject));
+		System.out.println("Replace name with pointer: " + namePointer.replace(jsonObject, Json.createValue("john")));
+		System.out.println("Check address with pointer: " + addressPointer.containsValue(jsonObject));
+		System.out.println("Add tags with pointer: " + tagsPointer.add(jsonObject, Json.createArrayBuilder().add("nice").build()));
+	  }
 
 }
